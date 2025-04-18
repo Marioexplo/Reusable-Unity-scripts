@@ -164,6 +164,7 @@ public class BackAndForth
 }
 
 /// <summary>Move an object <see cref="BackAndForth"/> more easily</summary>
+[System.Serializable]
 public struct PBackAndForth
 {
     public float speed;

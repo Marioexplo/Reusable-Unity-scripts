@@ -94,7 +94,7 @@ public class BackAndForth
         }
     }
 
-    ///<summary>It moves the object within the given space</summary>
+    ///<summary>It moves the object within the given space, must already be moving</summary>
     ///<param name="rb">The rigidbody of the object to move</param>
     ///<param name="speed">Must be positive</param>
     ///<param name="min">The left limit</param>
@@ -106,31 +106,33 @@ public class BackAndForth
         Transform obj = rb.transform;
         if (horizontal)
         {
-            rb.linearVelocityX = speed * direction;
             if (obj.position.x < min)
             {
                 direction = 1;
+                rb.linearVelocityX = speed * direction;
             }
             if (obj.position.x > max)
             {
                 direction = -1;
+                rb.linearVelocityX = speed * direction;
             }
         }
         else
         {
-            rb.linearVelocityY = speed * direction;
             if (obj.position.y < min)
             {
                 direction = 1;
+                rb.linearVelocityY = speed * direction;
             }
             if (obj.position.y > max)
             {
                 direction = -1;
+                rb.linearVelocityY = speed * direction;
             }
         }
     }
 
-    ///<summary>It moves the object horizontally flipping to face the direction of movement</summary>
+    ///<summary>It moves the object horizontally flipping to face the direction of movement, must already be moving</summary>
     ///<param name="rb">The rigidbody of the object to move</param>
     ///<param name="speed">Must be positive</param>
     ///<param name="min">The left limit</param>
@@ -140,7 +142,6 @@ public class BackAndForth
     ///<param name="originalScale">The scale of the object before this function is called for the first time</param>
     public static void Move(Rigidbody2D rb, float speed, float min, float max, ref int direction, bool faceRight, Vector3 originalScale)
     {
-        rb.linearVelocityX = speed * direction;
         Transform obj = rb.transform;
         if (obj.position.x < min)
         {
@@ -150,6 +151,7 @@ public class BackAndForth
                 originalScale.x *= -1;
             }
             obj.localScale = originalScale;
+            rb.linearVelocityX = speed * direction;
         }
         if (obj.position.x > max)
         {
@@ -159,12 +161,13 @@ public class BackAndForth
                 originalScale.x *= -1;
             }
             obj.localScale = originalScale;
+            rb.linearVelocityX = speed * direction;
         }
     }
 }
 
-/// <summary>Move an object <see cref="BackAndForth"/> more easily</summary>
 [System.Serializable]
+/// <summary>Move an object <see cref="BackAndForth"/> more easily</summary>
 public struct PBackAndForth
 {
     public float speed;

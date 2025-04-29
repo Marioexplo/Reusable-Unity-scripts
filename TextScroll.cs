@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 /// <summary>Automatically scrolls texts with functions for all situations</summary>
 public class TextScroll : MonoBehaviour
@@ -45,36 +43,41 @@ public class TextScroll : MonoBehaviour
                     count++;
                     timer = 0f;
                 }
-                if (type == Option.simple && count < text.Length)
+                switch (type)
                 {
-                    Add();
-                }
-                if (type == Option.array)
-                {
-                    if (count < array[arrayNumber].Length)
-                    {
-                        Add();
-                    } else if (autoArray && arrayNumber < array.Length - 1)
-                    {
-                        pauseTimer += Time.deltaTime;
-                        if (pauseTimer > pauseTime)
-                        {
-                            arrayNumber += 1;
-                            pauseTimer = 0f;
-                            Restart();
-                        }
-                    }
-                }
-                if (type == Option.branches)
-                {
-                    foreach (var txt in structure)
-                    {
-                        if (txt.name == branch && count < txt.text.Length)
+                    case Option.simple:
+                        if (count < text.Length)
                         {
                             Add();
-                            break;
                         }
-                    }
+                        break;
+
+                    case Option.array:
+                        if (count < array[arrayNumber].Length)
+                        {
+                            Add();
+                        } else if (autoArray && arrayNumber < array.Length - 1)
+                        {
+                            pauseTimer += Time.deltaTime;
+                            if (pauseTimer > pauseTime)
+                            {
+                                arrayNumber += 1;
+                                pauseTimer = 0f;
+                                Restart();
+                            }
+                        }
+                        break;
+
+                    case Option.branches:
+                        foreach (Branch txt in structure)
+                        {
+                            if (txt.name == branch && count < txt.text.Length)
+                            {
+                                Add();
+                                break;
+                            }
+                        }
+                        break;
                 }
             }
         }
@@ -86,18 +89,21 @@ public class TextScroll : MonoBehaviour
         text = txt;
         type = Option.simple;
     }
+
     ///<summary>Load an array of texts. Use with <see cref="autoArray"/> or select an <see cref="arrayNumber"/>. Use <see cref="playing"/> to start scrolling</summary>
     public void Load(string[] texts)
     {
         array = texts;
         type = Option.array;
     }
+
     ///<summary>Load an array of texts, each with a <see cref="branch"/> name. Use <see cref="playing"/> to start scrolling</summary>
     public void Load(Branch[] branches)
     {
         structure = branches;
         type = Option.branches;
     }
+
 
     /// <summary>Set <see cref="playing"/> and <see cref="time"/></summary>
     /// <param name="pause">The time after which a letter is added</param>
@@ -107,33 +113,42 @@ public class TextScroll : MonoBehaviour
         time = pause;
     }
 
+
     ///<summary>Get the scrolled text</summary>
     public string GetScrolled()
     {
-        if (type == Option.simple) { return text[..count]; }
-        if (type == Option.array) { return array[arrayNumber][..count]; }
-        if (type == Option.branches)
+        switch (type)
         {
-            foreach (var txt in structure)
-            {
-                if (txt.name == branch)
+            case Option.simple: return text[..count];
+
+            case Option.array: return array[arrayNumber][..count];
+
+            case Option.branches:
+                foreach (var txt in structure)
                 {
-                    return txt.text[..count];
+                    if (txt.name == branch)
+                    {
+                        return txt.text[..count];
+                    }
                 }
-            }
-            return "__error: wrong branch name";
+                throw new System.Exception("error: wrong branch name");
+
+            default: throw new System.Exception("error: type not set");
         }
-        return "__error: type not set";
     }
+
 
     ///<summary>Restart the timer and <see cref="count"/></summary>
     public void Restart() { timer = 0f; count = 0; }
+
     ///<summary>Dis/enable the automatic change of texts of the array</summary>
     ///<param name="interval">The time between the end of the scrolling of the text and the change of arrayNumber</param>
     public void EnableAutoArray(float interval, bool enable = true) { autoArray = enable; pauseTime = interval; }
 
+
     [System.Serializable]
     enum Option { simple, array, branches}
+
     [System.Serializable]
     /// <summary>It contains the branch name and its text</summary>
     public struct Branch

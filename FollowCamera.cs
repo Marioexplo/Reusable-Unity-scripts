@@ -8,6 +8,15 @@ public class FollowCamera : MonoBehaviour
     public float Ratio { get => ratio; set => ratio = Mathf.Clamp01(value); }
     public float minDistance;
     public Camera cam;
+    public Camera Cam
+    {
+        get => cam;
+        set
+        {
+            cam = value;
+            camTrans = cam.transform;
+        }
+    }
     private Transform camTrans;
 
     [Header("Borders")]

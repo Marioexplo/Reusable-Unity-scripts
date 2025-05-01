@@ -1,7 +1,7 @@
 using UnityEngine;
 
 ///<summary>Move an object back and forth</summary>
-public class BackAndForth
+public static class BackAndForth
 {
     ///<summary>It moves the object within the given space</summary>
     ///<param name="obj">The transform of the object to move</param>

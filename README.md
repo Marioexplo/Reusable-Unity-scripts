@@ -3,7 +3,7 @@ Here I leave some Unity scripts I think can be useful. I'm only at the beginning
 Anyway, before focusing on the next game I have in mind, I wanted to make some scripts I can reuse in the future. I'm sure I haven't created anything new but I can't find any reason why I shouldn't share my code here.
 
 ### Description and how-to-use:
-- **BackAndForth** *(class)*: this class contains static functions you can always use without needing to store it in a variable. You can:
+- **BackAndForth** *(class)*: this static class contains functions you can always use without needing to store it in a variable. You can:
   * Move back and forth on the vertical or horizzontal axis. Perfect for moving platforms.
   * Do that and store the movement value in a variable. Perfect if you need to move a character on the moving platform.
   * Move back and forth horizzontally and mirror the object to face the movement direction.
@@ -16,3 +16,4 @@ Anyway, before focusing on the next game I have in mind, I wanted to make some s
   * An array of Branches ("structure").
   - **AutoArray:** when you use the *array* type, you can enable this to automatically pass from a text of the array to the next one. You can also set the time this action will take.
   - **Branch:** this is a custom struct which contains a name (of the branch) and the text which will be scrolled. It works as the *array* but instead of setting the array's number of the text to scroll, you'll set the branch' name.
+- **SafeDestroy** *(class)*: destroy a component or a GameObject after deactivating it, this way you ensure non more actions will be made by these.

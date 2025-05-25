@@ -14,9 +14,10 @@ Anyway, before focusing on the next game I have in mind, I wanted to make some s
   * A simple string ("simple");
   * An array of strings ("array");
   * An array of Branches ("structure").
-  - **AutoArray:** when you use the *array* type, you can enable this to automatically pass from a text of the array to the next one. You can also set the time this action will take.
-  - **Branch:** this is a custom struct which contains a name (of the branch) and the text which will be scrolled. It works as the *array* but instead of setting the array's number of the text to scroll, you'll set the branch' name.
-  - **TextScrollUtilities** *(component)*: adds 2 functionalities to the main component:
-	- Directly apply the scrolled text to a Text component
-	- Call one or more functions (with Unity Events) when TextScroll has finished scrolling
+  - *AutoArray:* when you use the *array* type, you can enable this to automatically pass from a text of the array to the next one. You can also set the time this action will take.
+  - *Branch:* this is a custom struct which contains a name (of the branch) and the text which will be scrolled. It works as the *array* but instead of setting the array's number of the text to scroll, you'll set the branch' name.
+  - **Utilities**:
+	- **AutoScroll** *(component)*: directly apply the scrolled text to a Text component
+	- **AutoScrollTMPro** *(component)*: directly apply the scrolled text to a TextMeshProUGui component
+	- **ScrollActions** *(component)*: call one or more functions (with Unity Events) when TextScroll has finished scrolling
 - **SafeDestroy** *(class)*: destroy a component or a GameObject after deactivating it, this way you ensure non more actions will be made by these.

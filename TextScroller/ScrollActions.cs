@@ -1,18 +1,13 @@
-using UnityEngine;
-
-namespace TextScroller
+﻿namespace TextScroller
 {
-    public class TextScrollUtility : MonoBehaviour
+    public class ScrollActions : UnityEngine.MonoBehaviour
     {
-        [Tooltip("The Text to synchronize with the scrolling")]
-        public UnityEngine.UI.Text text;
         public TextScroll scroller;
         private bool once;
         public UnityEngine.Events.UnityEvent OnScrollCompleted;
 
         private void Update()
         {
-            if (text != null) text.text = scroller.GetScrolled();
             if (OnScrollCompleted != null)
             {
                 if (scroller.HasFinished && !once)

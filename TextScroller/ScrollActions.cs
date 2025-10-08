@@ -4,19 +4,19 @@
     {
         public TextScroll scroller;
         private bool once;
-        public UnityEngine.Events.UnityEvent OnScrollCompleted;
+        public UnityEngine.Events.UnityEvent onScrollCompleted;
 
         private void Update()
         {
-            if (OnScrollCompleted != null)
+            if (scroller.HasFinished)
             {
-                if (scroller.HasFinished && !once)
+                if (!once)
                 {
-                    OnScrollCompleted.Invoke();
+                    onScrollCompleted?.Invoke();
                     once = true;
                 }
-                if (once && !scroller.HasFinished) once = false;
             }
+            else if (once) once = false;
         }
     }
 }

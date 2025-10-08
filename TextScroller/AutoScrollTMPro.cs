@@ -1,22 +1,8 @@
-﻿using UnityEngine;
-
-namespace TextScroller
+﻿namespace TextScroller
 {
-    public class AutoScrollTMPro : MonoBehaviour
+    public class AutoScrollTMPro : AutoScrollBase
     {
         public TMPro.TextMeshProUGUI text;
-        public TextScroll scroller;
-
-        private void Update()
-        {
-            if (text != null) text.text = scroller.GetScrolled();
-        }
-
-        /// <summary>Call <see cref="TextScroll.Restart"/> and set text of <see cref="text"/> empty</summary>
-        public void Restart()
-        {
-            scroller.Restart();
-            text.text = string.Empty;
-        }
+        protected override string Target { set => text.text = value; }
     }
 }

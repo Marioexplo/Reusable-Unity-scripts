@@ -42,7 +42,7 @@ if (timer++ > time)
 }
 ```
 ## Direction
-It happens to me often to use an `int` to only store `1` and `-1`, and then having to compare it to get the direction as a boolean. So I made this ***struct*** to store a `sbyte` (lighter than `int`) and then just use it as an `int` or return a `bool`.
+It happens to me often to use an `int` to only store `1` and `-1`, and then having to compare it to get the direction as a boolean. So I made this ***struct*** to store an `int` and return that or a `bool`.
 ___
 You can use these scripts as you wish. You can also modify them to suit your needs or just take inspiration from them.  
 
